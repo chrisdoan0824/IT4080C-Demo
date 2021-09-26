@@ -7,8 +7,11 @@ public class MPPlayerMovement : NetworkBehaviour
 {
 
     public float movementSpeed = 5f;
+    public float rotationSpeed = 100f;
     public Transform camT;
     CharacterController mpCharController;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,8 +46,9 @@ public class MPPlayerMovement : NetworkBehaviour
 
     void MPMovePlayer()
     {
-        Vector3 moveVect = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        mpCharController.SimpleMove(moveVect * movementSpeed);
+        transform.Rotate(0, Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime, 0);
+        Vector3 forward = transform.TransformDirection(Vector3.forward);
+        mpCharController.SimpleMove(forward * movementSpeed * Input.GetAxis("Vertical"));
         
     }
 }
