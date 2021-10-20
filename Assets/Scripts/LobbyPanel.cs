@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class LobbyPanel : MonoBehaviour
 {
     [SerializeField] public Text playerName;
-    [SerializeField] private Image playerIcon;
+    [SerializeField] public Image playerIcon;
     [SerializeField] public Toggle readyIcon;
-    [SerializeField] private Text waitingText;
+    [SerializeField] public Text waitingText;
 
     internal void UpdatePlayerName(Text playerNameIn)
     {

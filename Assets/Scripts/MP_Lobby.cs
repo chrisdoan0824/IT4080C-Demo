@@ -21,7 +21,11 @@ public class MP_Lobby : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UpdateConnListServerRpc(NetworkManager.LocalClientId);
+        if (IsOwner)
+        {
+            UpdateConnListServerRpc(NetworkManager.LocalClientId);
+        }
+        
         NetworkManager.Singleton.OnClientConnectedCallback += HandleClientConnected;
     }
 
@@ -64,12 +68,13 @@ public class MP_Lobby : NetworkBehaviour
             lobbyPlayers[index].readyIcon.SetIsOnWithoutNotify(connectedplayer.networkPlayerReady);
             index++;
         }
-
-        for(; index < 4; index++)
+        for(;index < 4; index++)
         {
             lobbyPlayers[index].playerName.text = "Player Name";
             lobbyPlayers[index].readyIcon.SetIsOnWithoutNotify(false);
+            index++;
         }
+       
         if (IsHost)
         {
             startGameButton.gameObject.SetActive(true);
@@ -98,7 +103,11 @@ public class MP_Lobby : NetworkBehaviour
 
     private void HandleClientConnected(ulong clientID)
     {
-        UpdateConnListServerRpc(clientID);
+        if (IsOwner)
+        {
+            UpdateConnListServerRpc(clientID);
+        }
+        
         Debug.Log("A Player has connected ID: " + clientID);
     }
 
@@ -111,7 +120,16 @@ public class MP_Lobby : NetworkBehaviour
 
     private void ClientDisconnectedHandle(ulong clientID)
     {
-        Debug.Log("TODO: Player Disconnected");
+        for(int indx = 0; indx < nwPlayers.Count; indx++)
+        {
+            if(clientID == nwPlayers[indx].networkClientID)
+            {
+                nwPlayers.RemoveAt(indx);
+                Debug.Log("A Player has left ID: " + clientID);
+
+                break;
+            }
+        }
     }
 
     private void ClientConnectedHandle(ulong clientID)
@@ -161,9 +179,9 @@ public class MP_Lobby : NetworkBehaviour
 
     private bool CheckEveryoneReady()
     {
-        foreach(MP_PlayerInfo player in nwPlayers)
+        foreach(MP_PlayerInfo players in nwPlayers)
         {
-            if (!player.networkPlayerReady)
+            if (!players.networkPlayerReady)
             {
                 return false;
             }

@@ -17,18 +17,14 @@ public class MPPlayerMovement : NetworkBehaviour
     {
         mpCharController = GetComponent<CharacterController>();
         //color changing
-        if (IsLocalPlayer)
+        if (IsOwner)
         {
-            GetComponent<MeshRenderer>().material.color = Color.red;
+            GetComponent<MeshRenderer>().material.color = new Color(1,0,1,1);
         }
         else
         {
-            GetComponent<MeshRenderer>().material.color = Color.blue;
-        }
-
-        //disable other cameras
-        if (!IsLocalPlayer)
-        {
+            GetComponent<MeshRenderer>().material.color = Color.red;
+            //Disable other cameras
             camT.GetComponent<Camera>().enabled = false;
         }
     }
@@ -36,7 +32,7 @@ public class MPPlayerMovement : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsLocalPlayer)
+        if (IsOwner)
         {
             MPMovePlayer();
         }
