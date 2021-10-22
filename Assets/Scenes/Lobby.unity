@@ -340,6 +340,7 @@ MonoBehaviour:
   - {fileID: 1446161725}
   - {fileID: 580620835}
   playerPrefab: {fileID: 5808818861480575125, guid: 78779e07c5dcc8d4d836233e86f6d470, type: 3}
+  startGameButton: {fileID: 1287631997}
 --- !u!1001 &580620834
 PrefabInstance:
   m_ObjectHideFlags: 0
