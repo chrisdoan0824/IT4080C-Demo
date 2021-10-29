@@ -55,13 +55,14 @@
   <ItemGroup>
     <Compile Include="Assets\ParrelSync\Examples\CustomArgumentExample.cs" />
     <Compile Include="Assets\Scripts\MPPlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\MP_Lobby.cs" />
     <Compile Include="Assets\Hi.cs" />
     <Compile Include="Assets\Scripts\MP_TestStart.cs" />
     <Compile Include="Assets\Scripts\MPBulletSpawner.cs" />
-    <Compile Include="Assets\Scripts\MP_StartMenu.cs" />
-    <Compile Include="Assets\Scripts\LobbyPanel.cs" />
-    <Compile Include="Assets\Scripts\MP_Lobby.cs" />
     <Compile Include="Assets\Scripts\MP_PlayerInfo.cs" />
+    <Compile Include="Assets\Scripts\LobbyPanel.cs" />
+    <Compile Include="Assets\Scripts\MP_StartMenu.cs" />
+    <Compile Include="Assets\Scripts\MP_ChatUIScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ParrelSync\VERSION.txt" />

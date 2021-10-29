@@ -546,8 +546,10 @@ MonoBehaviour:
     AllowRuntimeSceneChanges: 0
     NetworkPrefabs:
     - Prefab: {fileID: 5808818861480575125, guid: 78779e07c5dcc8d4d836233e86f6d470, type: 3}
-      PlayerPrefab: 1
+      PlayerPrefab: 0
     - Prefab: {fileID: 770903690915559866, guid: 3dae75a93c33d534095d648485fa952e, type: 3}
+      PlayerPrefab: 0
+    - Prefab: {fileID: 7190119210849861765, guid: 72be99ae833c15c4da5b47de9024bf04, type: 3}
       PlayerPrefab: 0
     PlayerPrefabHash:
       id: 0
@@ -576,9 +578,7 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
-      type: {class: NullableBoolSerializable, ns: MLAPI.Configuration, asm: Unity.Multiplayer.MLAPI.Runtime}
-      data:
-        Value: 6825399121702647142
+      type: {class: , ns: , asm: }
 --- !u!4 &529936674
 Transform:
   m_ObjectHideFlags: 0

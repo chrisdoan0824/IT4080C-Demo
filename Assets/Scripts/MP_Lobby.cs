@@ -17,6 +17,7 @@ public class MP_Lobby : NetworkBehaviour
     //holds a list of network players
     private NetworkList<MP_PlayerInfo> nwPlayers = new NetworkList<MP_PlayerInfo>();
 
+    [SerializeField] private GameObject chatPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -171,14 +172,22 @@ public class MP_Lobby : NetworkBehaviour
             UnityEngine.Random.InitState((int)System.DateTime.Now.Ticks);
             int index = UnityEngine.Random.Range(0, spawnPoints.Length);
             GameObject currentPoint = spawnPoints[index];
+
+            //spawn player
             GameObject playerSpawn = Instantiate(playerPrefab, currentPoint.transform.position, Quaternion.identity);
             playerSpawn.GetComponent<NetworkObject>().SpawnWithOwnership(tmpClient.networkClientID);
             Debug.Log("Player spawned for: " + tmpClient.networkPlayerName);
+
+            //show chat ui
+            GameObject chatUISpawn = Instantiate(chatPrefab);
+            chatUISpawn.GetComponent<NetworkObject>().SpawnWithOwnership(tmpClient.networkClientID);
+            chatUISpawn.GetComponent<MP_ChatUIScript>().chatPlayers = nwPlayers;
         }
     }
 
     private bool CheckEveryoneReady()
     {
+        
         foreach(MP_PlayerInfo players in nwPlayers)
         {
             if (!players.networkPlayerReady)
