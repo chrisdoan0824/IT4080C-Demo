@@ -27,6 +27,11 @@ public class MP_PlayerAttribs : NetworkBehaviour
             TakeDamageServerRpc(damageVal);
             Destroy(collision.gameObject);
         }
+        else if(collision.gameObject.CompareTag("MedKit") && IsOwner)
+        {
+            Debug.Log("Healed");
+            HealDamageServerRpc();
+        }
     }
 
     [ServerRpc]
@@ -37,6 +42,16 @@ public class MP_PlayerAttribs : NetworkBehaviour
         {
             Debug.Log("You died");
             Destroy(this.gameObject);
+        }
+    }
+
+    [ServerRpc]
+    private void HealDamageServerRpc()
+    {
+        currentHp.Value += 20f;
+        if(currentHp.Value > maxHp)
+        {
+            currentHp.Value = maxHp;
         }
     }
 }
