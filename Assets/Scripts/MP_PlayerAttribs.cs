@@ -12,6 +12,7 @@ public class MP_PlayerAttribs : NetworkBehaviour
     private float maxHp = 100f;
     private float damageVal = 10f;
     private NetworkVariableFloat currentHp = new NetworkVariableFloat(100f);
+    public NetworkVariableBool powerUp = new NetworkVariableBool(false);
 
     // Update is called once per frame
     void Update()
@@ -31,6 +32,12 @@ public class MP_PlayerAttribs : NetworkBehaviour
         {
             Debug.Log("Healed");
             HealDamageServerRpc();
+        }
+        else if(collision.gameObject.CompareTag("PowerUp") && IsOwner)
+        {
+            Debug.Log("I got powered up");
+            damageVal = damageVal / 2;
+            powerUp.Value = true;
         }
     }
 

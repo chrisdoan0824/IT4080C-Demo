@@ -17,14 +17,14 @@ public class MPBulletSpawner :NetworkBehaviour
     {
         if (Input.GetButtonDown("Fire1") && IsOwner)
         {
-            //FireServerRpc(bulletSpeed, gameObject.GetComponent<MP_PlayerInfo>().powerUp.Value);
-            FireServerRpc(bulletSpeed);
+            FireServerRpc(bulletSpeed, gameObject.GetComponent<MP_PlayerAttribs>().powerUp.Value);
+            //FireServerRpc(bulletSpeed);
         }
     }
 
     [ServerRpc]
 
-    private void FireServerRpc(float speed, /*bool powerUp,*/ ServerRpcParams serverRpcParams = default)
+    private void FireServerRpc(float speed, bool powerUp, ServerRpcParams serverRpcParams = default)
     {
         Debug.Log("Fired weapon");
         Rigidbody bulletClone = Instantiate(bullet, transform.position, transform.rotation);
@@ -33,7 +33,7 @@ public class MPBulletSpawner :NetworkBehaviour
         bulletClone.gameObject.GetComponent<NetworkObject>().Spawn();
         Destroy(bulletClone.gameObject, 3);
 
-        /*if (powerUp)
+       if (powerUp)
         {
             Vector3 temp = new Vector3(1, 0, 0);
             bulletPOS.Translate(temp, bulletPOS);
@@ -51,6 +51,6 @@ public class MPBulletSpawner :NetworkBehaviour
 
             temp = new Vector3(1, 0, 0);
             bulletPOS.Translate(temp, bulletPOS);
-        }*/
+        }
     }
 }

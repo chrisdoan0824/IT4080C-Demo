@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SpawnPoint
   - MedKit
+  - PowerUp
   layers:
   - Default
   - TransparentFX
