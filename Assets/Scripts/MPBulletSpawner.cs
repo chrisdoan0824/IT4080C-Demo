@@ -29,6 +29,7 @@ public class MPBulletSpawner :NetworkBehaviour
         Debug.Log("Fired weapon");
         Rigidbody bulletClone = Instantiate(bullet, transform.position, transform.rotation);
         bulletClone.velocity = transform.forward * bulletSpeed;
+        bulletClone.GetComponent<MP_BulletScript>().spawnerPlayerId = serverRpcParams.Receive.SenderClientId;
 
         bulletClone.gameObject.GetComponent<NetworkObject>().Spawn();
         Destroy(bulletClone.gameObject, 3);
@@ -39,6 +40,7 @@ public class MPBulletSpawner :NetworkBehaviour
             bulletPOS.Translate(temp, bulletPOS);
             bulletClone = Instantiate(bullet, bulletPOS.position, transform.rotation);
             bulletClone.velocity = transform.forward * speed;
+            bulletClone.GetComponent<MP_BulletScript>().spawnerPlayerId = serverRpcParams.Receive.SenderClientId;
             bulletClone.gameObject.GetComponent<NetworkObject>().Spawn();
             Destroy(bulletClone.gameObject, 3);
 
@@ -46,6 +48,7 @@ public class MPBulletSpawner :NetworkBehaviour
             bulletPOS.Translate(temp, bulletPOS);
             bulletClone = Instantiate(bullet, bulletPOS.position, transform.rotation);
             bulletClone.velocity = transform.forward * speed;
+            bulletClone.GetComponent<MP_BulletScript>().spawnerPlayerId = serverRpcParams.Receive.SenderClientId;
             bulletClone.gameObject.GetComponent<NetworkObject>().Spawn();
             Destroy(bulletClone.gameObject, 3);
 

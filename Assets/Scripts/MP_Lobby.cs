@@ -169,6 +169,7 @@ public class MP_Lobby : NetworkBehaviour
         //spawn a playerprefab for each connected client
         foreach (MP_PlayerInfo tmpClient in nwPlayers)
         {
+            //get random spawn point location
             UnityEngine.Random.InitState((int)System.DateTime.Now.Ticks);
             int index = UnityEngine.Random.Range(0, spawnPoints.Length);
             GameObject currentPoint = spawnPoints[index];
